@@ -1,0 +1,51 @@
+import os, string
+from random import *
+import Crypto
+from Crypto.Cipher import AES
+fileObj=open('frankenstein.txt')
+content= fileObj.read()
+fileObj.close()
+cont=''
+
+class EncryptIt:
+
+    def __init__(self):
+        print("cool")
+
+        self.min_char=16
+        self.max_char=32
+        max=len(content)
+        self.allchars= string.ascii_letters+string.punctuation+string.digits
+        rcont = ''.join(content)
+
+        rem = len(rcont)%16
+        cont=max-rem
+        print (content[:cont])
+        print(cont)
+
+
+            
+        key= self.getkey().encode()
+        iv = b'hello world 1234'
+        aes = AES.new(key, AES.MODE_CBC, iv)
+        data = b'hello world 1234' # <- 16 bytes
+        encd = aes.encrypt(data)
+        outfile=open('out.txt', 'w')
+        #outfile.write(encd)
+        outfile.close()
+        print("The key used is :{0} of length :{1}".format(key, len(key)))
+        print(encd)
+        # bytes("hello", encoding="ascii")
+        #b = mystring.encode()
+    def getkey(self):
+        while True:
+            key1=''.join(choice(self.allchars) for x in range (randint(self.min_char, self.max_char)))
+            if len(key1)%16==0:
+                return key1
+            
+if __name__=="__main__":
+    enc=EncryptIt()
+
+
+
+_=xmO+kH#0Gz

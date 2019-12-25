@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" style="" lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ImageFile Module — Pillow (PIL Fork) 3.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+
+  
+    <link rel="stylesheet" href="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/sphinx_rtd_theme.css" type="text/css">
+  
+    <link rel="stylesheet" href="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/readthedocs-doc-embed.css" type="text/css">
+  
+
+  
+        <link rel="author" title="About these documents" href="https://pillow.readthedocs.io/en/3.0.x/about.html">
+    <link rel="top" title="Pillow (PIL Fork) 3.0.0 documentation" href="https://pillow.readthedocs.io/en/3.0.x/index.html">
+        <link rel="up" title="Reference" href="https://pillow.readthedocs.io/en/3.0.x/reference/index.html">
+        <link rel="next" title="ImageFilter Module" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFilter.html">
+        <link rel="prev" title="ImageEnhance Module" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageEnhance.html">
+ 
+<!-- RTD Extra Head -->
+
+    
+    
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="http://pillow.readthedocs.org/en/3.1.x/reference/ImageFile.html">
+<script type="text/javascript" async="" src="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/ga.js"></script><script type="text/javascript">
+  // This is included here because other places don't have access to the pagename variable.
+  var READTHEDOCS_DATA = {
+    project: "pillow",
+    version: "3.0.x",
+    language: "en",
+    page: "reference/ImageFile",
+    builder: "sphinx",
+    theme: "sphinx_rtd_theme",
+    docroot: "/docs/",
+    
+    source_suffix: ".rst",
+    
+    api_host: "https://readthedocs.org/",
+    commit: "7729d889"
+  }
+  // Old variables
+  var doc_version = "3.0.x";
+  var doc_slug = "pillow";
+  var page_name = "reference/ImageFile";
+  var html_theme = "sphinx_rtd_theme";
+</script>
+<!-- RTD Analytics Code -->
+<!-- Included in the header because you don't have a footer block. -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- end RTD Analytics Code -->
+<!-- end RTD <extrahead> -->
+
+
+  
+  <script src="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/modernizr.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://pillow.readthedocs.io/en/3.0.x/index.html" class="icon icon-home"> Pillow (PIL Fork)
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                3.0.x
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input name="q" placeholder="Search docs" type="text">
+    <input name="check_keywords" value="yes" type="hidden">
+    <input name="area" value="default" type="hidden">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/handbook/index.html">Handbook</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/index.html"><span class="toctree-expand"></span>Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/Image.html"><code class="docutils literal"><span class="pre">Image</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageChops.html"><code class="docutils literal"><span class="pre">ImageChops</span></code> (“Channel Operations”) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageColor.html"><code class="docutils literal"><span class="pre">ImageColor</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageCms.html"><code class="docutils literal"><span class="pre">ImageCms</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageDraw.html"><code class="docutils literal"><span class="pre">ImageDraw</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageEnhance.html"><code class="docutils literal"><span class="pre">ImageEnhance</span></code> Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href=""><span class="toctree-expand"></span><code class="docutils literal"><span class="pre">ImageFile</span></code> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-parse-an-image">Example: Parse an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parser"><code class="docutils literal"><span class="pre">Parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFilter.html"><code class="docutils literal"><span class="pre">ImageFilter</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFont.html"><code class="docutils literal"><span class="pre">ImageFont</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageGrab.html"><code class="docutils literal"><span class="pre">ImageGrab</span></code> Module (OS X and Windows only)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageMath.html"><code class="docutils literal"><span class="pre">ImageMath</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageMorph.html"><code class="docutils literal"><span class="pre">ImageMorph</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageOps.html"><code class="docutils literal"><span class="pre">ImageOps</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImagePalette.html"><code class="docutils literal"><span class="pre">ImagePalette</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImagePath.html"><code class="docutils literal"><span class="pre">ImagePath</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageQt.html"><code class="docutils literal"><span class="pre">ImageQt</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageSequence.html"><code class="docutils literal"><span class="pre">ImageSequence</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageStat.html"><code class="docutils literal"><span class="pre">ImageStat</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageTk.html"><code class="docutils literal"><span class="pre">ImageTk</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageWin.html"><code class="docutils literal"><span class="pre">ImageWin</span></code> Module (Windows-only)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ExifTags.html"><code class="docutils literal"><span class="pre">ExifTags</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/OleFileIO.html"><code class="docutils literal"><span class="pre">OleFileIO</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/PSDraw.html"><code class="docutils literal"><span class="pre">PSDraw</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/PixelAccess.html"><code class="docutils literal"><span class="pre">PixelAccess</span></code> Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/PyAccess.html"><code class="docutils literal"><span class="pre">PyAccess</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/PIL.html">PIL Package (autodoc of remaining modules)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/plugins.html">Plugin reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/porting.html">Porting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/releasenotes/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      <div id="rtd-or4dmg95" class="ethical-rtd"></div></div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="https://pillow.readthedocs.io/en/3.0.x/index.html">Pillow (PIL Fork)</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="https://pillow.readthedocs.io/en/3.0.x/index.html">Docs</a> »</li>
+      
+          <li><a href="https://pillow.readthedocs.io/en/3.0.x/reference/index.html">Reference</a> »</li>
+      
+    <li><code class="docutils literal"><span class="pre">ImageFile</span></code> Module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/python-pillow/Pillow/blob/3.0.x/docs/reference/ImageFile.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-PIL.ImageFile"></span><div class="section" id="imagefile-module">
+<h1><code class="xref py py-mod docutils literal"><span class="pre">ImageFile</span></code> Module<a class="headerlink" href="#imagefile-module" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="xref py py-mod docutils literal"><span class="pre">ImageFile</span></code> module provides support functions for the image open
+and save functions.</p>
+<p>In addition, it provides a <a class="reference internal" href="#PIL.ImageFile.Parser" title="PIL.ImageFile.Parser"><code class="xref py py-class docutils literal"><span class="pre">Parser</span></code></a> class which can be used to decode
+an image piece by piece (e.g. while receiving it over a network connection).
+This class implements the same consumer interface as the standard <strong>sgmllib</strong>
+and <strong>xmllib</strong> modules.</p>
+<div class="section" id="example-parse-an-image">
+<h2>Example: Parse an image<a class="headerlink" href="#example-parse-an-image" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFile</span>
+
+<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"lena.pgm"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">ImageFile</span><span class="o">.</span><span class="n">Parser</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">im</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"copy.jpg"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parser">
+<h2><a class="reference internal" href="#PIL.ImageFile.Parser" title="PIL.ImageFile.Parser"><code class="xref py py-class docutils literal"><span class="pre">Parser</span></code></a><a class="headerlink" href="#parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PIL.ImageFile.Parser">
+<em class="property">class </em><code class="descclassname">PIL.ImageFile.</code><code class="descname">Parser</code><a class="headerlink" href="#PIL.ImageFile.Parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incremental image parser.  This class implements the standard
+feed/close consumer interface.</p>
+<p>In Python 2.x, this is an old-style class.</p>
+<dl class="method">
+<dt id="PIL.ImageFile.Parser.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFile.Parser.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Consumer) Close the stream.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An image object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>IOError</strong> – If the parser failed to parse the image file either
+because it cannot be identified or cannot be
+decoded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PIL.ImageFile.Parser.feed">
+<code class="descname">feed</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFile.Parser.feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Consumer) Feed data to the parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> – A string buffer.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>IOError</strong> – If the parser failed to parse the image file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PIL.ImageFile.Parser.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFile.Parser.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Consumer) Reset the parser.  Note that you can only call this
+method immediately after you’ve created a parser; parser
+instances cannot be reused.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFilter.html" class="btn btn-neutral float-right" title="ImageFilter Module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageEnhance.html" class="btn btn-neutral" title="ImageEnhance Module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr><div><div id="rtd-m78vysom" class="ethical-rtd"></div></div>
+
+  <div role="contentinfo">
+    <p>
+        © Copyright 1995-2015, Fredrik Lundh and Contributors, Alex Clark and Contributors.
+      
+        <span class="commit">
+          Revision <code>7729d889</code>.
+        </span>
+      
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version rst-out-of-date" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 3.0.x
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions"><!-- Inserted RTD Footer -->
+<div class="injected">
+
+  
+
+      
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/latest/reference/ImageFile.html">latest</a></dd>
+        
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/stable/reference/ImageFile.html">stable</a></dd>
+        
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/5.0.0/reference/ImageFile.html">5.0.0</a></dd>
+        
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/5.1.x/reference/ImageFile.html">5.1.x</a></dd>
+        
+        
+      </dl>
+      
+      
+
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+        <dd><a href="https://readthedocs.org/projects/pillow/downloads/pdf/3.0.x/">PDF</a></dd>
+        
+        <dd><a href="https://readthedocs.org/projects/pillow/downloads/htmlzip/3.0.x/">HTML</a></dd>
+        
+        <dd><a href="https://readthedocs.org/projects/pillow/downloads/epub/3.0.x/">Epub</a></dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        <!-- These are kept as relative links for internal installs that are http -->
+        <dt>On Read the Docs</dt>
+        <dd>
+          <a href="https://readthedocs.org/projects/pillow/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/pillow/builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/pillow/downloads/">Downloads</a>
+        </dd>
+      </dl>
+      
+
+      
+
+      
+      <dl>
+        <dt>On GitHub</dt>
+        <dd>
+          <a href="https://github.com/python-pillow/Pillow/blob/3.0.x/docs/reference/ImageFile.rst">View</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/python-pillow/Pillow/edit/3.0.x/docs/reference/ImageFile.rst">Edit</a>
+        </dd>
+      </dl>
+      
+      
+
+      
+      <dl>
+        <dt>Search</dt>
+        <dd>
+          <div style="padding: 6px;">
+            <form id="flyout-search-form" class="wy-form" target="_blank" action="//readthedocs.org/projects/pillow/search/" method="get">
+              <input name="q" placeholder="Search docs" type="text">
+              </form>
+          </div>
+        </dd>
+      </dl>
+      
+
+
+
+      <hr>
+      
+        <small>
+          <span>Hosted by <a href="https://readthedocs.org/">Read the Docs</a></span>
+          <span> · </span>
+          <a href="https://docs.readthedocs.io/en/latest/privacy-policy.html">Privacy Policy</a>
+        </small>
+      
+
+      
+
+</div>
+</div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/jquery-2.js"></script>
+      <script type="text/javascript" src="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/jquery-migrate-1.js"></script>
+      <script type="text/javascript" src="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/underscore.js"></script>
+      <script type="text/javascript" src="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/doctools.js"></script>
+      <script type="text/javascript" src="ImageFile%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/readthedocs-doc-embed.js"></script>
+
+  
+
+  
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+
+</body></html>

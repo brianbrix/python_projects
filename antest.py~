@@ -1,0 +1,21 @@
+from Crypto.Cipher import AES
+import random
+content=open("out.txt", 'rb')
+with content as cont:
+    cont1=cont.read()
+content.close()
+key = b'Vj4BYnJooorZpXORU4NbH//Z' 
+iv = b'hello world 1234'
+aes = AES.new(key, AES.MODE_CBC, iv)
+##data = content.encode() # <- 16 bytes
+
+print(cont1)
+encd = aes.decrypt(cont1)
+#encrypted= encd.decode('utf-16')
+outfile=open('outt.txt', 'w+')#write bytes
+with outfile as f:
+    f.write(encd)
+outfile.close()
+
+print("The key used is :{0} of length :{1}".format(key, len(key)))
+print(encd[:50])

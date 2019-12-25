@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" style="" lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ImageFilter Module — Pillow (PIL Fork) 3.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+
+  
+    <link rel="stylesheet" href="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/sphinx_rtd_theme.css" type="text/css">
+  
+    <link rel="stylesheet" href="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/readthedocs-doc-embed.css" type="text/css">
+  
+
+  
+        <link rel="author" title="About these documents" href="https://pillow.readthedocs.io/en/3.0.x/about.html">
+    <link rel="top" title="Pillow (PIL Fork) 3.0.0 documentation" href="https://pillow.readthedocs.io/en/3.0.x/index.html">
+        <link rel="up" title="Reference" href="https://pillow.readthedocs.io/en/3.0.x/reference/index.html">
+        <link rel="next" title="ImageFont Module" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFont.html">
+        <link rel="prev" title="ImageFile Module" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFile.html">
+ 
+<!-- RTD Extra Head -->
+
+    
+    
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="http://pillow.readthedocs.org/en/3.1.x/reference/ImageFilter.html">
+<script type="text/javascript" async="" src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/ga.js"></script><script type="text/javascript">
+  // This is included here because other places don't have access to the pagename variable.
+  var READTHEDOCS_DATA = {
+    project: "pillow",
+    version: "3.0.x",
+    language: "en",
+    page: "reference/ImageFilter",
+    builder: "sphinx",
+    theme: "sphinx_rtd_theme",
+    docroot: "/docs/",
+    
+    source_suffix: ".rst",
+    
+    api_host: "https://readthedocs.org/",
+    commit: "7729d889"
+  }
+  // Old variables
+  var doc_version = "3.0.x";
+  var doc_slug = "pillow";
+  var page_name = "reference/ImageFilter";
+  var html_theme = "sphinx_rtd_theme";
+</script>
+<!-- RTD Analytics Code -->
+<!-- Included in the header because you don't have a footer block. -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- end RTD Analytics Code -->
+<!-- end RTD <extrahead> -->
+
+
+  
+  <script src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/modernizr.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="https://pillow.readthedocs.io/en/3.0.x/index.html" class="icon icon-home"> Pillow (PIL Fork)
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                3.0.x
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input name="q" placeholder="Search docs" type="text">
+    <input name="check_keywords" value="yes" type="hidden">
+    <input name="area" value="default" type="hidden">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/handbook/index.html">Handbook</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/index.html"><span class="toctree-expand"></span>Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/Image.html"><code class="docutils literal"><span class="pre">Image</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageChops.html"><code class="docutils literal"><span class="pre">ImageChops</span></code> (“Channel Operations”) Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageColor.html"><code class="docutils literal"><span class="pre">ImageColor</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageCms.html"><code class="docutils literal"><span class="pre">ImageCms</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageDraw.html"><code class="docutils literal"><span class="pre">ImageDraw</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageEnhance.html"><code class="docutils literal"><span class="pre">ImageEnhance</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFile.html"><code class="docutils literal"><span class="pre">ImageFile</span></code> Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href=""><span class="toctree-expand"></span><code class="docutils literal"><span class="pre">ImageFilter</span></code> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-filter-an-image">Example: Filter an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFont.html"><code class="docutils literal"><span class="pre">ImageFont</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageGrab.html"><code class="docutils literal"><span class="pre">ImageGrab</span></code> Module (OS X and Windows only)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageMath.html"><code class="docutils literal"><span class="pre">ImageMath</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageMorph.html"><code class="docutils literal"><span class="pre">ImageMorph</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageOps.html"><code class="docutils literal"><span class="pre">ImageOps</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImagePalette.html"><code class="docutils literal"><span class="pre">ImagePalette</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImagePath.html"><code class="docutils literal"><span class="pre">ImagePath</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageQt.html"><code class="docutils literal"><span class="pre">ImageQt</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageSequence.html"><code class="docutils literal"><span class="pre">ImageSequence</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageStat.html"><code class="docutils literal"><span class="pre">ImageStat</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageTk.html"><code class="docutils literal"><span class="pre">ImageTk</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageWin.html"><code class="docutils literal"><span class="pre">ImageWin</span></code> Module (Windows-only)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/ExifTags.html"><code class="docutils literal"><span class="pre">ExifTags</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/OleFileIO.html"><code class="docutils literal"><span class="pre">OleFileIO</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/PSDraw.html"><code class="docutils literal"><span class="pre">PSDraw</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/PixelAccess.html"><code class="docutils literal"><span class="pre">PixelAccess</span></code> Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/PyAccess.html"><code class="docutils literal"><span class="pre">PyAccess</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/PIL.html">PIL Package (autodoc of remaining modules)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/plugins.html">Plugin reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/porting.html">Porting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/releasenotes/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      <div id="rtd-j2r94xbo" class="ethical-rtd"><div class="ethical-sidebar"><div class="ethical-content"><a href="https://readthedocs.org/sustainability/click/163/gnjaqRytfsYl/" class="ethical-image-link"><img src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/a.png"></a><div class="ethical-text"><a href="https://readthedocs.org/sustainability/click/163/gnjaqRytfsYl/" rel="nofollow" target="_blank">Sentry provides open-source error tracking. Fix production bugs in seconds!</a></div></div><div class="ethical-callout"><small><em><a href="https://readthedocs.org/sustainability/advertising/">Sponsored</a><span> · </span><a href="https://docs.readthedocs.io/en/latest/ethical-advertising.html">Ads served ethically</a></em></small></div></div></div></div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="https://pillow.readthedocs.io/en/3.0.x/index.html">Pillow (PIL Fork)</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="https://pillow.readthedocs.io/en/3.0.x/index.html">Docs</a> »</li>
+      
+          <li><a href="https://pillow.readthedocs.io/en/3.0.x/reference/index.html">Reference</a> »</li>
+      
+    <li><code class="docutils literal"><span class="pre">ImageFilter</span></code> Module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="https://github.com/python-pillow/Pillow/blob/3.0.x/docs/reference/ImageFilter.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-PIL.ImageFilter"></span><div class="section" id="imagefilter-module">
+<h1><code class="xref py py-mod docutils literal"><span class="pre">ImageFilter</span></code> Module<a class="headerlink" href="#imagefilter-module" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="xref py py-mod docutils literal"><span class="pre">ImageFilter</span></code> module contains definitions for a pre-defined set of
+filters, which can be be used with the <a class="reference internal" href="https://pillow.readthedocs.io/en/3.0.x/reference/Image.html#PIL.Image.Image.filter" title="PIL.Image.Image.filter"><code class="xref py py-meth docutils literal"><span class="pre">Image.filter()</span></code></a> method.</p>
+<div class="section" id="example-filter-an-image">
+<h2>Example: Filter an image<a class="headerlink" href="#example-filter-an-image" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFilter</span>
+
+<span class="n">im1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">BLUR</span><span class="p">)</span>
+
+<span class="n">im2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">MinFilter</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">im3</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">MinFilter</span><span class="p">)</span>  <span class="c"># same as MinFilter(3)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>The current version of the library provides the following set of predefined
+image enhancement filters:</p>
+<ul class="simple">
+<li><strong>BLUR</strong></li>
+<li><strong>CONTOUR</strong></li>
+<li><strong>DETAIL</strong></li>
+<li><strong>EDGE_ENHANCE</strong></li>
+<li><strong>EDGE_ENHANCE_MORE</strong></li>
+<li><strong>EMBOSS</strong></li>
+<li><strong>FIND_EDGES</strong></li>
+<li><strong>SMOOTH</strong></li>
+<li><strong>SMOOTH_MORE</strong></li>
+<li><strong>SHARPEN</strong></li>
+</ul>
+<dl class="class">
+<dt id="PIL.ImageFilter.GaussianBlur">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">GaussianBlur</code><span class="sig-paren">(</span><em>radius=2</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.GaussianBlur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gaussian blur filter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>radius</strong> – Blur radius.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="PIL.ImageFilter.UnsharpMask">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">UnsharpMask</code><span class="sig-paren">(</span><em>radius=2</em>, <em>percent=150</em>, <em>threshold=3</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.UnsharpMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unsharp mask filter.</p>
+<p>See Wikipedia’s entry on <a class="reference external" href="https://en.wikipedia.org/wiki/Unsharp_masking#Digital_unsharp_masking">digital unsharp masking</a> for an explanation of
+the parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>radius</strong> – Blur Radius</li>
+<li><strong>percent</strong> – Unsharp strength, in percent</li>
+<li><strong>threshold</strong> – Threshold controls the minimum brightness change that
+will be sharpened</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="PIL.ImageFilter.Kernel">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">Kernel</code><span class="sig-paren">(</span><em>size</em>, <em>kernel</em>, <em>scale=None</em>, <em>offset=0</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.Kernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a convolution kernel.  The current version only
+supports 3x3 and 5x5 integer and floating point kernels.</p>
+<p>In the current version, kernels can only be applied to
+“L” and “RGB” images.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>size</strong> – Kernel size, given as (width, height). In the current
+version, this must be (3,3) or (5,5).</li>
+<li><strong>kernel</strong> – A sequence containing kernel weights.</li>
+<li><strong>scale</strong> – Scale factor. If given, the result for each pixel is
+divided by this value.  the default is the sum of the
+kernel weights.</li>
+<li><strong>offset</strong> – Offset. If given, this value is added to the result,
+after it has been divided by the scale factor.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="PIL.ImageFilter.RankFilter">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">RankFilter</code><span class="sig-paren">(</span><em>size</em>, <em>rank</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.RankFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rank filter.  The rank filter sorts all pixels in
+a window of the given size, and returns the <strong>rank</strong>‘th value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>size</strong> – The kernel size, in pixels.</li>
+<li><strong>rank</strong> – What pixel value to pick.  Use 0 for a min filter,
+<code class="docutils literal"><span class="pre">size</span> <span class="pre">*</span> <span class="pre">size</span> <span class="pre">/</span> <span class="pre">2</span></code> for a median filter, <code class="docutils literal"><span class="pre">size</span> <span class="pre">*</span> <span class="pre">size</span> <span class="pre">-</span> <span class="pre">1</span></code>
+for a max filter, etc.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="PIL.ImageFilter.MedianFilter">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">MedianFilter</code><span class="sig-paren">(</span><em>size=3</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.MedianFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a median filter. Picks the median pixel value in a window with the
+given size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> – The kernel size, in pixels.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="PIL.ImageFilter.MinFilter">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">MinFilter</code><span class="sig-paren">(</span><em>size=3</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.MinFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a min filter.  Picks the lowest pixel value in a window with the
+given size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> – The kernel size, in pixels.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="PIL.ImageFilter.MaxFilter">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">MaxFilter</code><span class="sig-paren">(</span><em>size=3</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.MaxFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a max filter.  Picks the largest pixel value in a window with the
+given size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> – The kernel size, in pixels.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="PIL.ImageFilter.ModeFilter">
+<em class="property">class </em><code class="descclassname">PIL.ImageFilter.</code><code class="descname">ModeFilter</code><span class="sig-paren">(</span><em>size=3</em><span class="sig-paren">)</span><a class="headerlink" href="#PIL.ImageFilter.ModeFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a mode filter. Picks the most frequent pixel value in a box with the
+given size.  Pixel values that occur only once or twice are ignored; if no
+pixel value occurs more than twice, the original pixel value is preserved.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> – The kernel size, in pixels.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFont.html" class="btn btn-neutral float-right" title="ImageFont Module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="https://pillow.readthedocs.io/en/3.0.x/reference/ImageFile.html" class="btn btn-neutral" title="ImageFile Module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr><div><div id="rtd-i9wlyhp2" class="ethical-rtd"></div></div>
+
+  <div role="contentinfo">
+    <p>
+        © Copyright 1995-2015, Fredrik Lundh and Contributors, Alex Clark and Contributors.
+      
+        <span class="commit">
+          Revision <code>7729d889</code>.
+        </span>
+      
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version rst-out-of-date" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 3.0.x
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions"><!-- Inserted RTD Footer -->
+<div class="injected">
+
+  
+
+      
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/latest/reference/ImageFilter.html">latest</a></dd>
+        
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html">stable</a></dd>
+        
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/5.0.0/reference/ImageFilter.html">5.0.0</a></dd>
+        
+        
+        
+        <dd><a href="https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html">5.1.x</a></dd>
+        
+        
+      </dl>
+      
+      
+
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+        <dd><a href="https://readthedocs.org/projects/pillow/downloads/pdf/3.0.x/">PDF</a></dd>
+        
+        <dd><a href="https://readthedocs.org/projects/pillow/downloads/htmlzip/3.0.x/">HTML</a></dd>
+        
+        <dd><a href="https://readthedocs.org/projects/pillow/downloads/epub/3.0.x/">Epub</a></dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        <!-- These are kept as relative links for internal installs that are http -->
+        <dt>On Read the Docs</dt>
+        <dd>
+          <a href="https://readthedocs.org/projects/pillow/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/pillow/builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/pillow/downloads/">Downloads</a>
+        </dd>
+      </dl>
+      
+
+      
+
+      
+      <dl>
+        <dt>On GitHub</dt>
+        <dd>
+          <a href="https://github.com/python-pillow/Pillow/blob/3.0.x/docs/reference/ImageFilter.rst">View</a>
+        </dd>
+        <dd>
+          <a href="https://github.com/python-pillow/Pillow/edit/3.0.x/docs/reference/ImageFilter.rst">Edit</a>
+        </dd>
+      </dl>
+      
+      
+
+      
+      <dl>
+        <dt>Search</dt>
+        <dd>
+          <div style="padding: 6px;">
+            <form id="flyout-search-form" class="wy-form" target="_blank" action="//readthedocs.org/projects/pillow/search/" method="get">
+              <input name="q" placeholder="Search docs" type="text">
+              </form>
+          </div>
+        </dd>
+      </dl>
+      
+
+
+
+      <hr>
+      
+        <small>
+          <span>Hosted by <a href="https://readthedocs.org/">Read the Docs</a></span>
+          <span> · </span>
+          <a href="https://docs.readthedocs.io/en/latest/privacy-policy.html">Privacy Policy</a>
+        </small>
+      
+
+      
+
+</div>
+</div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/jquery-2.js"></script>
+      <script type="text/javascript" src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/jquery-migrate-1.js"></script>
+      <script type="text/javascript" src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/underscore.js"></script>
+      <script type="text/javascript" src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/doctools.js"></script>
+      <script type="text/javascript" src="ImageFilter%20Module%20%E2%80%94%20Pillow%20(PIL%20Fork)%203.0.0%20documentation_files/readthedocs-doc-embed.js"></script>
+
+  
+
+  
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+
+</body></html>

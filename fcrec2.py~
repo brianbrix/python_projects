@@ -1,0 +1,235 @@
+import face_recognition
+import cv2,os, string
+import action, encryptit
+from random import *
+import Crypto
+from Crypto.Cipher import AES
+from io import BytesIO
+#import pymysql.cursors
+import tkinter as tk
+from tkinter import ttk
+from tkinter import Menu
+from PIL import Image, ImageTk
+from cryptIt import Application as app
+
+class Recognize(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.geometry('700x500')
+        self.values=[]
+        
+        self.configure(bg="#333")
+        self.act=action.Action
+        # Connect to the database
+##        self.connection = pymysql.connect(host='localhost',
+##                                     user='root',
+##                                     password='',
+##                                     db='db',
+##                                     charset='utf8mb4',
+##                                     cursorclass=pymysql.cursors.DictCursor)
+##
+        self.EncryptIt= encryptit.EncryptIt
+
+        # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
+        # other example, but it includes some basic performance tweaks to make things run a lot faster:
+        #   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
+        #   2. Only detect faces in every other frame of video.
+
+        # PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
+        # OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
+        # specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
+
+        # Get a reference to webcam #0 (the default one)
+        self.video_capture = cv2.VideoCapture(0)
+
+        folder= "images"
+        ret = self.video_capture.set(3,640)
+        ret = self.video_capture.set(4,480)
+        count=0
+
+        while(count<=10):
+
+            success, self.image = self.video_capture.read()
+            #cv2.imwrite(os.path.join(folder, "frame{:d}.jpg".format(count)), image)
+            self.image= cv2.resize(self.image, (0, 0), fx=0.25, fy=0.25)
+            self.image2=self.image[:,:,::-1]
+            cv2.imwrite(os.path.join(folder,"frame%d.jpg" %count), self.image2)
+
+            #cv2.imshow('Video', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+            count+=1
+
+
+        #load another one
+        self.me=face_recognition.load_image_file("images/frame3.jpg")
+        self.me_encoding=face_recognition.face_encodings(self.me)
+
+        # Create arrays of known face encodings and their names
+        self.known_face_encodings = [
+            self.me_encoding
+        ]
+       
+
+        self.known_face_names = []
+        self.known_face_names.append(self.email)
+
+        # Initialize some variables
+        self.face_locations = []
+        self.face_encodings = []
+        self.face_names = []
+        self.process_this_frame = True
+
+        while True:
+            # Grab a single frame of video
+            ret, self.frame = self.video_capture.read()
+
+            # Resize frame of video to 1/4 size for faster face recognition processing
+            self.small_frame = cv2.resize(self.frame, (0, 0), fx=0.25, fy=0.25)
+
+            # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
+            #you can use either of the options below
+            #rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
+            self.rgb_small_frame=self.small_frame[ : ,:, ::-1]
+
+            # Only process every other frame of video to save time
+            if self.process_this_frame:
+                # Find all the faces and face encodings in the current frame of video
+                self.face_locations = face_recognition.face_locations(self.rgb_small_frame)
+                self.face_encodings = face_recognition.face_encodings(self.rgb_small_frame, self.face_locations)
+
+                self.face_names = []
+                for self.face_encoding in self.face_encodings:
+                    # See if the face is a match for the known face(s)
+                    self.matches = face_recognition.compare_faces(self.known_face_encodings,self.face_encoding)
+                    #self.name = "Unknown"
+
+                    # If a match was found in known_face_encodings, just use the first one.
+                    if True in self.matches:
+                        self.first_match_index = self.matches.index(True)
+                
+
+            self.process_this_frame = not self.process_this_frame
+
+
+            # Display the results
+            for (top, right, bottom, left), self.name in zip(self.face_locations, self.face_names):
+                # Scale back up face locations since the frame we detected in was scaled to 1/4 size
+                top *= 4
+                right *= 4
+                bottom *= 4
+                left *= 4
+
+
+                # Draw a box around the face
+                cv2.rectangle(self.frame, (left, top), (right, bottom), (0, 0, 255), 2)
+
+                # Draw a label with a name below the face
+                cv2.rectangle(self.frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                font = cv2.FONT_HERSHEY_DUPLEX
+                cv2.putText(self.frame, self.email, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+
+            # Display the resulting image
+            cv2.imshow(self.email, self.frame)
+
+            # Hit 'q' on the keyboard to quit!
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        # Release handle to the webcam
+        self.video_capture.release()
+        cv2.destroyAllWindows()
+        self.contProc()
+
+
+
+    def contProc(self):
+
+
+            self.encryptIt()
+
+##    def browse(self):
+##        lab,butt=self.encFile()
+##        file = filedialog.askopenfilename(filetypes = (("Text files","*.txt"),("all files","*.*")))
+##        self.lb= tk.Label(lab,text=file)
+##        self.lb.place(x=50, y=100)
+##        butt.config(state='active', command=self.encryptFile)
+##        return file
+
+
+    def encryptIt(self):
+        print(self.browse())
+        fileObj=open('frankenstein.txt')
+        self.content= fileObj.read()
+        fileObj.close()
+        rcont = ''.join(self.content)
+
+        self.allchars= string.ascii_letters+string.punctuation+string.digits
+
+
+
+
+        rem = len(rcont)%16
+        if rem!=0:
+            add=16-rem
+            additional=''.join(choice(self.allchars) for x in range (add))
+            self.content+=additional
+
+
+        #cont=max-rem
+        #realcont= self.content[:cont]
+        max=len(self.content)
+        print (max)
+
+
+
+        key= self.getkey().encode()
+        iv = b'hello world 1234'
+        aes = AES.new(key, AES.MODE_CBC, iv)
+        data = self.content.encode() # <- 16 bytes
+        encd = aes.encrypt(data)
+        #encrypted= encd.decode('utf-16')
+        outfile=open('out.txt', 'wb')#write bytes
+        with outfile as f:
+            f.write(encd)
+        outfile.close()
+
+        print("The key used is :{0} of length :{1}".format(key, len(key)))
+        print(encd[:50])
+
+        # bytes("hello", encoding="ascii")
+        #b = mystring.encode()
+    def encFile(self):
+        self.labelframe = tk.LabelFrame(self,width=400, height=200, text="Encrypt file", padx=10, pady=10)
+        self.labelframe.place(x=0, y=0)
+        self.label = tk.Label( self.labelframe,text="Choose the file to encrypt below\n. You can encrypt several types of files\n. This software allows you to encrypt file using passwords\n and keys", justify=tk.LEFT)
+        self.label.place(x=10,y=0)
+        self.btn = tk.Button(self.labelframe,text="Browse file", command=self.browse)
+        self.btn.place(x=40, y=70)
+        
+        self.butn=tk.Button(self.labelframe, text="Continue", state='disabled')
+        self.butn.place(x=30, y=140)
+        
+        self.butc=tk.Button(self.labelframe, text="Cancel", command=self.confirm)
+        self.butc.place(x=200, y=140)
+        
+    
+        return (self.labelframe, self.butn)
+    def browse(self):
+        lab,butt=self.encFile()
+        file = tk.filedialog.askopenfilename(filetypes = (("Text files","*.txt"),("all files","*.*")))
+        self.lb= tk.Label(lab,text=file)
+        self.lb.place(x=50, y=100)
+        butt.config(state='active', command=self.encryptFile)
+        return file
+    def getkey(self):
+        self.allchars= string.ascii_letters+string.punctuation+string.digits
+        self.min_char=16
+        self.max_char=32
+        while True:
+            key1=''.join(choice(self.allchars) for x in range (randint(self.min_char, self.max_char)))
+            if len(key1)%16==0:
+                return key1
+
+if __name__=="__main__":
+    pass

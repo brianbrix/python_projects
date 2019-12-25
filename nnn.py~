@@ -1,0 +1,19 @@
+import tkinter as tk
+from tkinter import ttk
+from tkinter import Menu
+from PIL import Image, ImageTk
+comb= tk.Label(text="Select an algoritm")
+themes=["AES", "DES", "BLOWFISH"]
+option=tk.StringVar()
+
+combo=ttk.Combobox(self,values=themes, state='readonly', height=3, textvariable=option)
+
+combo.bind('<<ComboboxSelected>>', self.justamethod)
+combo.current(0)
+           
+comb.place(x=300, y=20)
+combo.place(x=300,y=50)
+
+def justamethod(self, event):
+        print("method is called")
+        print(combo.get())

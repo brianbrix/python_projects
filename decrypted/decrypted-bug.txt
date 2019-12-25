@@ -1,0 +1,691 @@
+Bayes Networks
+
+
+6.872/HST.950
+
+
+What Probabilistic Models
+
+
+Should We Use?
+
+
+•	
+
+Full joint distribution 
+•	 Completely expressive 
+•	 Hugely data-hungry 
+•	
+•	 Relatively concise 
+
+Exponential computational complexity 
+•	 Naive Bayes (full conditional independence) 
+
+Fast ~ (#features) 
+
+•	 Need data ~ (#hypotheses) × (#features) × (#feature-vals) 
+•	
+hypotheses 
+
+•	 Cannot express dependencies among features or among 
+•	 Cannot consider possibility of multiple hypotheses co
+-
+
+occurring
+
+
+Bayesian Networks
+
+(aka Belief Networks)
+
+
+•	 Graphical representation of dependencies among a set of random 
+
+variables 
+•	 Nodes: variables 
+•	 Directed links to a node from its parents: direct probabilistic 
+•	
+
+dependencies 
+Each Xi has a conditional probability distribution, 
+P(Xi|Parents(Xi)), showing the effects of the parents on the 
+node. 
+
+•	 The graph is directed (DAG); hence, no cycles. 
+•	 This is a language that can express dependencies between Naive 
+Bayes and the full joint distribution, more concisely 
+•  Given some new evidence, how does this affect the probability
+
+•	 Given some evidence, what are the most likely values of other 
+
+of some other node(s)? P(X|E) —belief propagation/updating
+
+
+variables? 
+
+                           
+
+—MAP explanation 
+
+Burglary Network
+
+
+(due to J. Pearl)
+
+
+Burglary 
+
+Earthquake 
+
+Alarm 
+
+JohnCalls 
+
+MaryCalls 
+
+Burglary Network
+
+
+(due to J. Pearl)
+
+
+P(B) 
+0.001 
+
+Burglary 
+
+Earthquake 
+
+P(E) 
+0.002 
+
+Alarm 
+
+JohnCalls 
+
+MaryCalls 
+
+B 
+t 
+t 
+f 
+f 
+
+E 
+t 
+f 
+t 
+f 
+
+P(A|B,E) 
+
+0.95 
+0.94 
+0.29 
+0.001 
+
+A 
+t 
+f 
+
+P(M|A) 
+0.70 
+0.01 
+
+A 
+t 
+f 
+
+P(J|A) 
+0.90 
+0.05 
+
+If everything depends on everything
+
+
+21 
+
+Burglary 
+
+Earthquake 
+
+20
+
+22 
+
+Alarm 
+
+23 
+
+JohnCalls 
+
+MaryCalls 
+
+24
+
+•  This model requires just as many parameters as the full joint 
+
+distribution! 
+
+Computing the Joint Distribution from a 
+
+
+Bayes Network
+
+
+•	 As usual, we abuse notation: 
+
+• 
+•	
+
+E.g., what’s the probability that an alarm has sounded, there was 
+neither an earthquake nor a burglary, and both John and Mary 
+called? 
+
+Requirements for Constructing a BN 
+•  Recall that the deﬁnition of the conditional probability was 
+•  and thus we get the chain rule,
+
+•  Generalizing to n variables,
+
+•  and repeatedly applying this idea,
+
+
+•  This “works” just in case we can deﬁne a partial order so that
+
+
+Topological Interpretations
+
+
+U1 
+
+Un
+
+U1 
+
+Un
+
+Z1 
+
+X 
+
+Zn 
+
+Z1 
+
+X 
+
+Zn 
+
+Y1 
+
+Yn 
+
+Y1 
+
+Yn 
+
+A node, X, is conditionally independent of 
+its non-descendants, Zi, given its parents, Ui. 
+
+A node, X, is conditionally independent of all other 
+nodes in the network given its Markov blanket: 
+its parents, Ui, children,Yi, and children’s parents, 
+Zi. 
+
+BN’s can be Compact
+
+
+•	
+•	
+
+•	
+
+For a network of 40 binary variables, the full joint distribution has 
+240 entries (> 1,000,000,000,000) 
+If |Par(xi)| ≤ 5, however, then the 40 (conditional) probability 
+tables each have ≤ 32 entries, so the total number of parameters 
+≤ 1,280 
+Largest medical BN I know (Pathﬁnder) had 109 variables! 2109 ≈ 
+1036 
+
+Burglary 
+
+Earthquake 
+
+Alarm 
+
+How Not to Build BN’s
+
+
+JohnCalls 
+
+MaryCalls 
+
+•	 With the wrong ordering of nodes, the network becomes more 
+complicated, and requires more (and more difﬁcult) conditional 
+probability assessments 
+
+MaryCalls 
+
+JohnCalls 
+
+MaryCalls 
+
+JohnCalls 
+
+Alarm 
+
+Earthquake 
+
+Burglary 
+
+Earthquake 
+
+Burglary 
+
+Alarm
+
+Order: M, J,A, B, E	
+
+Order: M, J, E, B,A
+
+
+Simplifying Conditional Probability Tables
+
+•	 Do we know any structure in the way that Par(x) “cause” x? 
+•	
+If each destroyer can sink the ship with probability P(s|di), what is 
+the probability that the ship will sink if it’s attacked by both? 
+
+•  For |Par(x)| = n, this requires O(n) parameters, not O(kn)
+
+
+Image by MIT OpenCourseWare.
+
+Photo by Konabish on Flickr. 
+
+Image by MIT OpenCourseWare.
+
+Inference
+
+
+•	 Recall the two basic inference problems: Belief propagation & 
+MAP explanation 
+•	 Trivially, we can enumerate all “matching” rows of the joint 
+•	
+
+probability distribution 
+For poly-trees (not even undirected loops—i.e., only one 
+connection between any pair of nodes; like our Burglary 
+example), there are efﬁcient linear algorithms, similar to 
+constraint propagation 
+For arbitrary BN’s, all inference is NP-hard! 
+•	
+Exact solutions 
+•	 Approximation 
+
+•	
+
+Burglary 
+
+Earthquake 
+
+Alarm 
+
+JohnCalls 
+
+MaryCalls 
+
+Exact Solution of BN’s
+
+
+(Burglary example)
+
+
+•  Notes: 
+
+•  Sum over all “don’t care” variables 
+•  Factor common terms out of summation 
+•  Calculation becomes a sum of products of sums of products ... 
+
+Poly-trees are easy
+
+
+Escape 
+
+Burglary 
+
+Earthquake 
+
+Drunk 
+
+Alarm 
+
+TVshow 
+
+Bottles 
+
+JohnCalls 
+
+MaryCalls 
+
+•	
+
+Singly-connected structures 
+allow propagation of 
+observations via single paths 
+•	
+“Down” is just use of 
+conditional probability 
+•	
+“Up” is just Bayes rule 
+•  Formulated as message 
+
+propagation rules
+
+•	
+Linear time (network 
+diameter) 
+•	
+Fails on general networks! 
+
+Exact Solution of BN’s
+
+
+(non-poly-trees) 
+
+A 
+
+B 
+
+C 
+
+D 
+
+E 
+
+•  What is the probability of a speciﬁc state, say 
+
+A=t, B=f, C=t, D=t, E=f? 
+
+•  What is the probability that E=t given B=t? 
+•  Consider the term P(e,b)
+
+
+Alas, optimal 
+factoring is NP-hard 
+
+•  12 instead of 32 multiplications (even in this 
+
+
+small example)
+
+
+Other Exact Methods
+
+
+A 
+
+B 
+
+C 
+
+D 
+
+E 
+
+A 
+
+B,C 
+
+D 
+
+E 
+
+•	
+
+Join-tree: Merge variables into (small!) sets of variables to make 
+graph into a poly-tree. Most commonly-used; aka Clustering, 
+Junction-tree, Potential) 
+
+•	 Cutset-conditioning: Instantiate a (small!) set of variables, then solve 
+
+each residual problem, and add solutions weighted by 
+probabilities of the instantiated variables having those values 
+...
+
+• 
+•	 All these methods are essentially equivalent; with some time-
+
+space tradeoffs. 
+
+Approximate Inference in BN’s
+
+
+•	 Direct Sampling—samples joint distribution 
+•	 Rejection Sampling—computes P(X|e), uses ancestor evidence 
+nodes in sampling 
+•	
+Likelihood Weighting—like Rejection Sampling, but weights by 
+probability of descendant evidence nodes 
+•	 Markov chain Monte Carlo 
+
+•	 Gibbs and other similar sampling methods 
+
+Direct Sampling
+
+
+function Prior-Sample(bn) returns an event sampled from bn
+    inputs: bn, a Bayes net specifying the joint distribution P(X1, ... Xn)
+  x := an event with n elements
+  for i = 1 to n do
+
+ xi := a random sample from P(Xi|Par(Xi))
+
+
+  return x
+
+
+•	
+
+From a large number of samples, we can estimate all joint 
+probabilities 
+•	 The probability of an event is the fraction of all complete 
+
+events generated by PS that match the partially speciﬁed event 
+•	
+
+hence we can compute all conditionals, etc. 
+
+Rejection Sampling
+
+
+function Rejection-Sample(X, e, bn, N) returns an estimate of P(X|e)
+    inputs: bn, a Bayes net 
+
+  X, the query variable
+  e, evidence speciﬁed as an event
+  N, the number of samples to be generated 
+
+local: K, a vector of counts over values of X, initially 0
+
+  for j = 1 to N do 
+
+y := PriorSample(bn)
+ if y	 is consistent with e then
+
+      K[v] := K[v]+1 where v is the value of X in y
+  return Normalize(K[X]) 
+
+•	 Uses PriorSample to estimate the proportion of times each value 
+•	 But, most samples may be irrelevant to a speciﬁc query, so this is 
+
+of X appears in samples that are consistent with e 
+
+quite inefﬁcient 
+
+Likelihood Weighting
+
+
+•	
+
+In trying to compute P(X|e), where e is the evidence (variables 
+with known, observed values), 
+•	
+Sample only the variables other than those in e 
+•	 Weight each sample by how well it predicts e 
+
+SWS(z, e)w(z, e) =  ! 
+
+i=1	
+
+l	
+
+=	 P (z, e) 
+
+m
+
+P (zi|Par(Zi)) ! 
+
+i=1 
+
+P (ei|Par(Ei)) 
+
+Likelihood 
+Weighting 
+
+SWS(z, e)w(z, e) =  ! 
+
+i=1 
+
+l
+
+=  P (z, e) 
+
+m
+
+P (zi Par(Zi)) ! 
+
+i=1
+
+|
+
+P (ei Par(Ei)) 
+
+|
+
+function Likelihood-Weighting(X, e, bn, N) returns an estimate of P(X|e)
+
+    inputs: bn, a Bayes net 
+
+  X, the query variable
+  e, evidence speciﬁed as an event
+  N, the number of samples to be generated 
+
+local:W, a vector of weighted counts over values of X, initially 0
+
+  for j = 1 to N do 
+
+y,w := WeightedSample(bn,e)
+ if y is consistent with e then 
+
+W[v] := W[v]+w where v is the value of X in y
+
+  return Normalize(W[X]) 
+
+function Weighted-Sample(bn,e) returns an event and a weight
+  x := an event with n elements; w := 1
+  for i = 1 to n do
+
+ if Xi has a value xi in e
+ then w := w * P(Xi = xi | Par(Xi))
+ else xi := a random sample from P(Xi | Par(Xi))
+
+  return x,w 
+
+Markov chain Monte Carlo 
+
+U1	
+
+U
+
+n 
+
+function MCMC(X, e, bn, N) returns an estimate of P(X|e) 
+local: K[X], a vector of counts over values of X, initially 0 
+
+Z, the non-evidence variables in bn (includes X) 
+x, the current state of the network, initially a copy of e	
+
+initialize x with random values for the vars in Z
+  for j = 1 to N do 
+
+for each Zi in Z do 
+
+Z1 
+
+X 
+
+Zn 
+
+Y1 
+
+Yn 
+
+sample the value of Zi in x from P(Zi|mb(Zi)), given the values of mb(Zi) in x 
+K[v] := K[v]+1 where v is the value of X in x 
+
+return Normalize(K[X]) 
+•	 Wander incrementally from the last state sampled, instead of re-
+generating a completely new sample 
+•	
+For every unobserved variable, choose a new value according to 
+its probability given the values of vars in it Markov blanket 
+(remember, it’s independent of all other vars) 
+
+•	 After each change, tally the sample for its value of X; this will only 
+•	 Problem: “narrow passages” 
+
+change sometimes 
+
+Most Probable Explanation
+
+
+•	
+So far, we have been solving for P(X|e), which yields a distribution 
+over all possible values of the x’s 
+•	 What it we want the best explanation of a set of evidence, i.e., the 
+highest-probability set of values for the x’s, given e? 
+•	
+Just maximize over the “don’t care” variables rather than summing
+
+•	 This is not necessarily the same as just choosing the value of each 
+
+x with the highest probability 
+
+Rules and Probabilities
+
+
+•	 Many have wanted to put a probability on assertions and on 
+•	
+•	 Problems: 
+
+rules, and compute with likelihoods 
+E.g., Mycin’s certainty factor framework 
+•	 A (p=.3) & B (p=.7) ==p=.8==> C (p=?) 
+•	 How to combine uncertainties of preconditions and of rule 
+•	 How to combine evidence from multiple rules 
+•	 Theorem:There is NO such algebra that works when rules are 
+considered independently. 
+•	 Need BN for a consistent model of probabilistic inference 
+
+MIT OpenCourseWare
+http://ocw.mit.edu 
+
+HST.950J / 6.872 Biomedical Computing 
+Fall 2010 
+
+For information about citing these materials or our Terms of Use, visit: http://ocw.mit.edu/terms. 
+
+2zqp}ZC9bU

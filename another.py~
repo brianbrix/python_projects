@@ -1,0 +1,86 @@
+import tkinter as tk
+from tkinter import ttk
+
+from tkinter import scrolledtext
+from tkinter import messagebox
+from tkinter import filedialog
+from tkinter import Menu
+class Application(tk.Tk):
+    def __init__(self,parent):
+        tk.Tk.__init__(self,parent)
+        self.geometry('300x300')
+        self.parent = parent
+        self.initialize()
+
+    def initialize(self):
+         
+        lbl = tk.Label(self, text="Hello")
+        lbl.grid(column=0, row=0)
+        btn=tk.Button(self, text='Quit', command=self.menus, bg='green', fg='pink')
+        btn.grid(column=1, row=0)
+        
+    def menus(self):
+        menu = Menu(self)
+        news = Menu(menu)
+        news.add_command(label='New')
+        news.add_separator()
+        news.add_command(label='Open')
+        news.add_separator()
+        news.add_command(label='Save')
+        news.add_separator()
+        news.add_command(label='Save As')
+        menu.add_cascade(label='FIle', menu=news)
+        newss = Menu(menu)
+        newss.add_command(label='Undo')
+        newss.add_separator()
+        newss.add_command(label='Redo')
+        newss.add_separator()
+        newss.add_command(label='Preferences')
+        newss.add_separator()
+        newss.add_command(label='Another')
+        menu.add_cascade(label='Edit', menu=newss)
+        self.config(menu=menu) 
+        
+        
+    def clicked(self):
+        
+        lbl=tk.Label(text="GOOD")
+        lbl.grid(column=0, row=0)
+        combo = tk.ttk.Combobox(self)
+        combo['values']= (1, 2, 3, 4, 5, "Text")
+        combo.current(0) #set the selected item
+        combo.grid(column=4, row=3)
+        
+        chk_var= tk.IntVar()
+        chk_var.set(1)
+        chk=tk.Checkbutton(self, text='Choose', var=chk_var)
+        chk.grid(column=0, row=4)
+        txt = scrolledtext.ScrolledText(self,width=40,height=10)
+        txt.insert(tk.INSERT,'You text goes here')
+ 
+        txt.grid(column=0,row=5)
+        messagebox.showinfo('Message title', 'Message content')
+        messagebox.showwarning('Message title', 'Message content') 
+        res = tk.messagebox.askyesno('Message title','Message content')
+        style = ttk.Style()
+ 
+        style.theme_use('default')
+         
+        style.configure("black.Horizontal.TProgressbar", background='black')
+         
+        bar = ttk.Progressbar(self, length=200, style='black.Horizontal.TProgressbar')
+         
+        bar['value'] = 70
+         
+        bar.grid(column=0, row=0)
+        
+        file = filedialog.askopenfilename(filetypes = (("Text files","*.txt"),("all files","*.*")))
+        #for rdiobutton you can add command attribute to perform a task when clicked
+        
+        
+        
+        
+if __name__ == "__main__":
+    app = Application(None)
+    app.title('my application')
+    app.mainloop()

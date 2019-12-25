@@ -1,0 +1,13 @@
+##import os
+##os.system("gnome-terminal -e 'bash -c \"python3 test.py; bash\" '")
+#####################################
+##import base64
+##image="Extracted/new.jpg"
+##with open(image, "rb") as img:
+##    str= base64.b64encode(img.read())
+##    print(str)
+
+import pyperclip
+pyperclip.copy("This is the text to be copied")
+spam=pyperclip.paste()
+print(spam)
